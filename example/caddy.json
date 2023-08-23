@@ -1,0 +1,42 @@
+{
+  "apps": {
+    "http": {
+      "servers": {
+        "example": {
+          "logs": {
+            "default_logger_name": "",
+            "logger_names": {
+              "": ""
+            },
+            "skip_hosts": [""],
+            "skip_unmapped_hosts": false,
+            "should_log_credentials": false
+          },
+          "listen": [":80"],
+          "routes": [
+            {
+              "match": [
+                {
+                  "host": ["localhost"]
+                }
+              ],
+              "handle": [
+                {
+                  "handler": "data_provider"
+                },
+                {
+                  "handler": "reverse_proxy",
+                  "upstreams": [
+                    {
+                      "dial": "localhost:3000"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

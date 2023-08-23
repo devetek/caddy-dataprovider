@@ -1,0 +1,35 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+	http.Handle("/", http.HandlerFunc(handleDefaultRequest))
+	http.ListenAndServe(":8080", nil)
+}
+
+func handleDefaultRequest(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+
+	for name, values := range r.Header {
+		// Loop over all values for the name.
+		for _, value := range values {
+			fmt.Println(name, value)
+		}
+	}
+
+	resp := make(map[string]string)
+	resp["message"] = "Home Page"
+	jsonResp, err := json.Marshal(resp)
+
+	if err != nil {
+		log.Fatalf("Error happened in JSON marshal. Err: %s", err)
+	}
+
+	w.Write(jsonResp)
+}
