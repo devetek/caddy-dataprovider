@@ -8,6 +8,7 @@ import (
 	"github.com/caddyserver/caddy/v2/caddyconfig/httpcaddyfile"
 	"github.com/caddyserver/caddy/v2/modules/caddyhttp"
 	"github.com/devetek/caddy-dataprovider/controllers"
+	"github.com/devetek/caddy-dataprovider/utils"
 )
 
 func init() {
@@ -47,9 +48,9 @@ func (m *Middleware) Validate() error {
 // ServeHTTP implements caddyhttp.MiddlewareHandler.
 func (m Middleware) ServeHTTP(w http.ResponseWriter, r *http.Request, next caddyhttp.Handler) error {
 
-	data := controllers.GetDataPDP("a")
+	data := controllers.GetDataPDP("default")
 
-	r.Header.Add("Kratos-Edge-Data", data)
+	r.Header.Add("Kratos-Edge-Data", utils.RemoveNewLine(data))
 
 	return next.ServeHTTP(w, r)
 }
