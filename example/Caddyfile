@@ -1,0 +1,15 @@
+devel.tokopedia.com:443 {
+	tls devel.tokopedia.com.pem devel.tokopedia.com-key.pem
+
+	@homeassistant host homeassistant.example.com
+	handle @homeassistant {
+		encode zstd gzip
+		reverse_proxy homeassistant:8123
+	}
+
+	@other host other.example.com
+	handle @other {
+		encode zstd gzip
+		reverse_proxy other
+	}
+}

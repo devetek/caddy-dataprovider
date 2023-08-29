@@ -26,7 +26,7 @@ func getLinkProductDetailAPI(target string) string {
 }
 
 func GetDataPDP(productName string) string {
-	apiResp, err := utils.Fetcher(getLinkProductDetailAPI(productName), "")
+	apiResp, err := utils.Fetcher("GET", getLinkProductDetailAPI(productName), "")
 	if err != nil {
 		log.Println(err)
 		return ""

@@ -1,17 +1,24 @@
 package utils
 
 import (
+	"bytes"
 	"log"
 	"net/http"
 	"time"
 )
 
-func Fetcher(url string, payload string) (*http.Response, error) {
+func Fetcher(method string, url string, payload string) (*http.Response, error) {
 	var start = time.Now()
 	var client = &http.Client{}
+	var body *bytes.Buffer = nil
+
+	// set payload if not empty
+	if payload != "" {
+		body = bytes.NewBuffer([]byte(payload))
+	}
 
 	// init request
-	request, err := http.NewRequest("GET", url, nil)
+	request, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
 	}
@@ -23,9 +30,7 @@ func Fetcher(url string, payload string) (*http.Response, error) {
 	}
 
 	elapsed := time.Since(start)
-	if payload == "" {
-		log.Printf("Fetcher took %s", elapsed)
-	}
+	log.Printf("Fetcher took %s", elapsed)
 
 	return response, nil
 }

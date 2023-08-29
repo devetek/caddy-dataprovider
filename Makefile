@@ -1,3 +1,10 @@
+# When you found config with official Caddyfile and want to translate to json, use this command
+json-adapter:
+	@xcaddy adapt --config example/Caddyfile  --adapter caddyfile
+
+generate-ssl:
+	@mkcert YOURDOMAIN
+
 check-module:
 	@xcaddy list-modules
 

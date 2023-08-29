@@ -2,10 +2,7 @@ module github.com/devetek/caddy-dataprovider
 
 go 1.20
 
-require (
-	github.com/caddyserver/caddy/v2 v2.7.4
-	go.uber.org/zap v1.25.0
-)
+require github.com/caddyserver/caddy/v2 v2.7.4
 
 require (
 	filippo.io/edwards25519 v1.0.0 // indirect
@@ -92,6 +89,7 @@ require (
 	go.step.sm/crypto v0.33.0 // indirect
 	go.step.sm/linkedca v0.20.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
+	go.uber.org/zap v1.25.0 // indirect
 	golang.org/x/crypto v0.12.0 // indirect
 	golang.org/x/exp v0.0.0-20230310171629-522b1b587ee0 // indirect
 	golang.org/x/mod v0.11.0 // indirect
